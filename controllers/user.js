@@ -1,9 +1,9 @@
 
-
+const mongoose=require('mongoose')
 //const User=require('../models/usersignup')
 const User=require('../models/userlogin')
 const Debate=require('../models/comment')
-const mongoose= require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 
 exports.createUser= async(req,res)=>{
@@ -63,12 +63,12 @@ exports.loginuser=async(req,res)=>{
 exports.commentCreate=async(req,res)=>{
    
      try{
-        if(req.session.user){
+          if(req.session.user){
              
-          const comments = new Debate({
-         
+          const comments =new Debate({
+            user:req.session.user,
              text :req.body.text,
-             user:req.session.user._id
+          
             });
           await comments.save();
           console.log(comments);
@@ -77,9 +77,10 @@ exports.commentCreate=async(req,res)=>{
         }else{
             res.redirect('/login')
         }
+        
        
      }catch(err){
-        console.log(err);
+        console.log('..'+err);
         req.flash('error','something wrong');
         res.redirect('/angular-debate')
      };

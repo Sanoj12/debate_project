@@ -4,9 +4,9 @@ const Schema=mongoose.Schema;
 
 const commentSchema = new Schema({
 
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
+     user:{
+        type:Object,
+       
         required:true,
     },
     
@@ -25,4 +25,4 @@ const commentSchema = new Schema({
 }) ;
 
 Debate=mongoose.model('Comments',commentSchema);
-module.export=Debate;
+module.exports=Debate;
