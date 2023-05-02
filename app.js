@@ -2,15 +2,20 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 const flash=require('connect-flash');
+const passport= require('passport');
 const session=require('express-session')
 const bodyParser=require('body-parser');
 var cookieParser = require('cookie-parser');
 var hbs=require('express-handlebars');
+
+
 var logger = require('morgan');
+
 const mongoose=require('mongoose')
 
 var userRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
+
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -42,6 +47,16 @@ app.use((req,res,next)=>{
   res.locals.message=req.flash();
   next();
 });
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+//GOOGLE-AUTH.
+
+
+
+
 
 
 const Connection=('mongodb+srv://sanojcsam123:rJrBBcju6xYmc5mi@debateapi.hymyl4r.mongodb.net/debate_db?retryWrites=true&w=majority')

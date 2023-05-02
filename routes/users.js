@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const userControl=require('../controllers/user');
 const Comments=require('../models/comment');
+const passport = require('passport');
+require('../authenticate');
 const app=express();
 
 
@@ -30,6 +32,19 @@ router.get('/login',function(req,res){
 
 router.post('/login',userControl.loginuser)
 
+
+router.get('/google',
+  passport.authenticate('google',{scope:['profile','email']}));
+
+router.get('/google/callback',passport.authenticate('google', { failureRedirect: '/login' }),(req,res)=>{
+          
+            console.log('user logged in :'+req.session.user);
+            res.redirect('/')
+
+         
+ 
+  //res.end('logged in')
+}) ; 
 
 //SIGNUP 
 router.get('/signup',(req,res)=>{
@@ -67,7 +82,7 @@ router.get('/angular-blog',(req,res)=>{
 
 router.get('/angular-debate',async(req,res)=>{
  if(req.session.user){
-  res.render('user/angular-debate',{message:req.flash(),user:req.session.user,Comments});
+  res.render('user/angular-debate',{message:req.flash(),user:req.session.user,comments:Comments});
  }else{
   
    res.redirect('/login');

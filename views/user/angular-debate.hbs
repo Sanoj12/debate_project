@@ -1,17 +1,17 @@
 {{>blog-header}}
 <section>
     <div class="container10">
-        <div class="row">
+        <div class="row justify-centent-center">
             <div class="col-12">
                 <h2 class="text-center text-dark mt-4">Angular VS React?</h2>
             </div>
-            <div class="col-md-9 text-dark">
+            <div class="col-md-9 text-dark p-4">
                   <form id="comment-section" action="/angular-debate" method="POST">
                   
-                    <div>
+                    <div class="p-4 ml-4">
                         <h1></h1>
                         <label for="text">Comment:</label>
-                        <textarea name="text" name="text"></textarea>
+                        <textarea name="text" name="text" placeholder="Write your comment"></textarea>
 
                     </div>
 
@@ -22,23 +22,25 @@
 
     </div>
 
-    
-    <div class="comment">
-        {{#each comments}}
-        <div>
-            <h3>
-                {{email}}
-            </h3>
-            <p>{{text}}</p>
-        </div>
+    <div class="container11">
+        <div class="row">
+            <div class="col-12">
+                <div class="comment">
+                    <h3>Comments</h3>
+                    {{#each Comments}}
 
-        {{/each}}
+                    
+
+                </div>
+            </div>
+        </div>
     </div>
+   
 </section>
 
 
 <script>
-    const form= document.getElementById('coment-section')
+    const form= document.getElementById('comment-section')
     form.reset();
 </script>
 
