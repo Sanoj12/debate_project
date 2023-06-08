@@ -1,9 +1,12 @@
 
 const mongoose=require('mongoose')
 //const User=require('../models/usersignup')
-const User=require('../models/userlogin')
+const user=require('../models/userlogin')
 const Debate=require('../models/comment')
 const ObjectId = mongoose.Types.ObjectId;
+
+
+
 
 
 exports.createUser= async(req,res)=>{

@@ -6,8 +6,8 @@
                 <h2 class="text-center text-dark mt-4">Angular VS React?</h2>
             </div>
             <div class="col-md-9 text-dark p-4">
-                  <form id="comment-section" action="/angular-debate" method="POST">
-                  
+                <form id="comment-section" action="/angular-debate" method="POST">
+
                     <div class="p-4 ml-4">
                         <h1></h1>
                         <label for="text">Comment:</label>
@@ -16,7 +16,7 @@
                     </div>
 
                     <button type="submit">Submit</button>
-                  </form>
+                </form>
             </div>
         </div>
 
@@ -25,22 +25,28 @@
     <div class="container11">
         <div class="row">
             <div class="col-12">
-                <div class="comment">
+                <div class="comment-section">
                     <h3>Comments</h3>
-                    {{#each Comments}}
 
-                    
+                    {{#each 1  comments}}
+                    <div>
+
+                        <h1>{{this.user}}:</h1>
+                        <p>{{this.text}}:</p>
+
+                    </div>
+                    {{/each}}
 
                 </div>
             </div>
         </div>
     </div>
-   
+
 </section>
 
 
 <script>
-    const form= document.getElementById('comment-section')
+    const form = document.getElementById('comment-section')
     form.reset();
 </script>
 

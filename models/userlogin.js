@@ -7,16 +7,16 @@ const Schema = mongoose.Schema;
 const userSchema =new  Schema({
     email:{
         type:String,
-        required:true
+        required:[true,"please enter your email"]
     },
     password:{
         type:String,
-        required:true
+        required:[true,"please enter your password"]
     }
 })
 
-User= mongoose.model('Users',userSchema);
-module.exports=User;
+module.exports=mongoose.model('Users',userSchema);
+
 
 
 

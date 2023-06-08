@@ -4,9 +4,12 @@ var path = require('path');
 const flash=require('connect-flash');
 const passport= require('passport');
 const session=require('express-session')
+const jwt=require('jsonwebtoken')
+
 const bodyParser=require('body-parser');
 var cookieParser = require('cookie-parser');
 var hbs=require('express-handlebars');
+const dotenv=require('dotenv').config()
 
 
 var logger = require('morgan');
@@ -15,8 +18,10 @@ const mongoose=require('mongoose')
 
 var userRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
+const dbconnects = require('./config/db');
 
-
+dbconnects();
+const port= 5000;
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -28,6 +33,7 @@ app.set('view engine', 'hbs');
 
 app.engine('.hbs',hbs.engine({extname:'.hbs',defaultLayout:'layout',layoutsDir:__dirname +'/views/layout/',partialsDir:__dirname +'/views/partials/'}));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -54,19 +60,11 @@ app.use(passport.session());
 
 //GOOGLE-AUTH.
 
-
-
-
-
-
-const Connection=('mongodb+srv://sanojcsam123:rJrBBcju6xYmc5mi@debateapi.hymyl4r.mongodb.net/debate_db?retryWrites=true&w=majority')
-
-mongoose.connect(Connection)
-.then((res)=>{
-   console.log("database connected successfully  $ server running port  3000");
-}).catch((err)=>{
-  console.log("error:" +err);
+app.listen(port,()=>{
+   console.log(`server running started ${port}`)
 })
+
+
 
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
